@@ -3,6 +3,7 @@
  *
  *  Created on: Sep. 16, 2019
  *      Author: takis
+ *      Modifications and set up to work: Andres Cordoba
  */
 
 #include <stdio.h>
@@ -39,7 +40,7 @@ void	disp_sorted(int *data)
 /*
  *	thread function to display the average of the set of numbers periodically
  */
-void 	disp_avg(float x)
+void	disp_avg(float x)
 {
 	printf("the current average is: %f\n", x);
 	return;
@@ -67,6 +68,8 @@ void	*avg_thread(void *arr)
 		{
 			average = (float) (sum/num_ints);
 		}
+		disp_avg(average);
+		usleep(100000);
 	}
 	return x; // return the set, unchanged
 }
@@ -100,6 +103,8 @@ void	*bubb_sort_thread(void *arr)
 					}
 				}
 			}
+			disp_sorted(x);
+			usleep(100000);
 		}
 	}
 	return x; // return the set, sorted
@@ -107,10 +112,10 @@ void	*bubb_sort_thread(void *arr)
 
 int main()
 {
-	pthread_t	thread_calc_1;	// our handle for the averaging thread
-    pthread_t	thread_calc_2;	// our handle for the sorting thread
-    int			set[MAXINTS]; 	// storage for our numbers
+	pthread_t	thread_avg;	// our handle for the averaging thread
+    pthread_t	thread_sort;	// our handle for the sorting thread
 
+    int			set[MAXINTS]; 	// storage for our numbers
 
     // initialize set to zero
     for (int i=0; i != MAXINTS; ++i)
@@ -120,9 +125,32 @@ int main()
 
     // create threads
 
-    // main loop (get user input)
+    if(pthread_create(&thread_avg, NULL, &avg_thread, &set))
+    {
+    	printf("Failed to create thread");
+    	return 1;
+    }
+    if(pthread_create(&thread_sort, NULL, &bubb_sort_thread, &set))
+    {
+    	printf("Failed to create thread");
+    	return 1;
+    }
+    // main loop (get user input
+    for(num_ints = 0; num_ints<MAXINTS; num_ints++)
+	{
+		printf("Please enter an integer\n");
+		scanf("%d",&set[num_ints]);
+	}
+
+    for(int i = 0; i<MAXINTS; i++)
+	{
+		printf("Values entered are:%d \n", set[i]);
+	}
+
+
 
     done=1; // user has finished entering data
+
     return 0;
 }
 
