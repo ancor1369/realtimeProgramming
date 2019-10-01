@@ -147,10 +147,8 @@ int main()
 		printf("Values entered are:%d \n", set[i]);
 	}
 
-
-
     done=1; // user has finished entering data
-
+    //So we finish the program
     return 0;
 }
 
