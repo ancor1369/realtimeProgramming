@@ -68,8 +68,6 @@ void	*avg_thread(void *arr)
 		{
 			average = (float) (sum/num_ints);
 		}
-		disp_avg(average);
-		usleep(100000);
 	}
 	return x; // return the set, unchanged
 }
@@ -103,8 +101,8 @@ void	*bubb_sort_thread(void *arr)
 					}
 				}
 			}
-			disp_sorted(x);
-			usleep(100000);
+
+
 		}
 	}
 	return x; // return the set, sorted
@@ -146,7 +144,8 @@ int main()
 	{
 		printf("Values entered are:%d \n", set[i]);
 	}
-
+    disp_sorted(set);
+    disp_avg(average);
     done=1; // user has finished entering data
     //So we finish the program
     return 0;
