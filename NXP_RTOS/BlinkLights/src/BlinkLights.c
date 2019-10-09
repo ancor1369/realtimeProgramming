@@ -1,6 +1,6 @@
 /*
 ===============================================================================
- Name        : FirstProject.c
+ Name        : BlinkLights.c
  Author      : $(author)
  Version     :
  Copyright   : $(copyright)
@@ -13,6 +13,7 @@
 #include "chip.h"
 #else
 #include "board.h"
+#include "FreeRTOS.h"
 #endif
 #endif
 
