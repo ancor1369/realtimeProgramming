@@ -74,8 +74,8 @@ static void Board_LED_Init(void)
 	/* Pin PIO0_22 is configured as GPIO pin during SystemInit */
 	/* Set the PIO_22 as output */
 	Chip_GPIO_WriteDirBit(LPC_GPIO, LED0_GPIO_PORT_NUM, LED0_GPIO_BIT_NUM, true);
-	Chip_GPIO_WriteDirBit(LPC_GPIO3, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM, true);
-	Chip_GPIO_WriteDirBit(LPC_GPIO3, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, true);
+	Chip_GPIO_WriteDirBit(LPC_GPIO, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM, true);
+	//Chip_GPIO_WriteDirBit(LPC_GPIO, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, true);
 }
 
 /*****************************************************************************
@@ -136,28 +136,16 @@ void Board_UARTPutSTR(char *str)
 /* Sets the state of a board LED to on or off */
 void Board_LED_Set(uint8_t LEDNumber, bool OnorOff)
 {
-	bool state;
-
-	if(OnorOff == true)
-	{
-		state = false;
-	}
-	else
-	{
-		state  = true;
-	}
-
-	/* There is only one LED */
 	if (LEDNumber == 0) {
-		Chip_GPIO_WritePortBit(LPC_GPIO, LED0_GPIO_PORT_NUM, LED0_GPIO_BIT_NUM, state);
+		Chip_GPIO_WritePortBit(LPC_GPIO, LED0_GPIO_PORT_NUM, LED0_GPIO_BIT_NUM, OnorOff);
 	}
 	else if(LEDNumber == 1)
 	{
-		Chip_GPIO_WritePortBit(LPC_GPIO3, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM, state);
+		Chip_GPIO_WritePortBit(LPC_GPIO, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM, OnorOff);
 	}
 	else if(LEDNumber == 2)
 	{
-		Chip_GPIO_WritePortBit(LPC_GPIO3, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, state);
+		Chip_GPIO_WritePortBit(LPC_GPIO, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, OnorOff);
 	}
 }
 
@@ -171,11 +159,11 @@ bool Board_LED_Test(uint8_t LEDNumber)
 	}
 	else if (LEDNumber == 1)
 	{
-			state = Chip_GPIO_ReadPortBit(LPC_GPIO3, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM);
+			state = Chip_GPIO_ReadPortBit(LPC_GPIO, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM);
 	}
 	else if (LEDNumber == 2)
 	{
-			state = Chip_GPIO_ReadPortBit(LPC_GPIO3, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM);
+			state = Chip_GPIO_ReadPortBit(LPC_GPIO, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM);
 	}
 
 	return state;
@@ -206,11 +194,12 @@ void Board_Init(void)
 
 	/* Initializes GPIO */
 	Chip_GPIO_Init(LPC_GPIO);
-	Chip_GPIO_Init(LPC_GPIO3);
+	//Chip_GPIO_Init(LPC_GPIO3);
 	Chip_IOCON_Init(LPC_IOCON);
 
 	/* Initialize LEDs */
 	Board_LED_Init();
+	Board_Debug_Init();
 }
 
 /* Returns the MAC address assigned to this board */
