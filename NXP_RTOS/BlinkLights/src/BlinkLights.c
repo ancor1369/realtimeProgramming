@@ -1,49 +1,106 @@
 /*
 ===============================================================================
  Name        : BlinkLights.c
- Author      : $(author)
+ Author      : Andres Cordoba
  Version     :
- Copyright   : $(copyright)
+ Copyright   : This software is provided as is for learning purposes
  Description : main definition
 ===============================================================================
 */
 
-#if defined (__USE_LPCOPEN)
-#if defined(NO_BOARD_LIB)
-#include "chip.h"
-#else
+
 #include "board.h"
 #include "FreeRTOS.h"
-#endif
-#endif
+#include "task.h"
 
-#include <cr_section_macros.h>
+#define timeCnt 3;
 
-// TODO: insert other include files here
+static void setHardware(void)
+{
+	SystemCoreClockUpdate();
+	Board_Init();
+	Board_LED_Set(0, false);
+	Board_LED_Set(1, false);
+	//Board_LED_Set(3, false);
+}
 
-// TODO: insert other definitions and declarations here
+static void turnOff(void)
+{
+	Board_LED_Set(0, false);
+	Board_LED_Set(1, false);
+	Board_LED_Set(2, false);
+}
 
-int main(void) {
+/*This is the Task for LED 1*/
+static void LED1_Task(void *pvParameters)
+{
+	bool LedState = true;
 
-#if defined (__USE_LPCOPEN)
-    // Read clock settings and update SystemCoreClock variable
-    SystemCoreClockUpdate();
-#if !defined(NO_BOARD_LIB)
-    // Set up and initialize all required blocks and
-    // functions related to the board hardware
-    Board_Init();
-    // Set the LED to the state of "On"
-    Board_LED_Set(0, true);
-#endif
-#endif
+	while (1)
+	{
+		turnOff();
+		Board_LED_Set(0, LedState);
+		vTaskDelay(configTICK_RATE_HZ);
+		LedState = (bool) !LedState;
+		Board_LED_Set(0, LedState);
+		vTaskDelay(3*configTICK_RATE_HZ);
+		LedState = (bool) !LedState;
+	}
+}
 
-    // TODO: insert code here
+///*This is the thread for LED 2*/
+static void LED2_Task(void *pvParameters)
+{
+	bool LedState = false;
+	while(1)
+	{
+		turnOff();
+		vTaskDelay(configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
+		Board_LED_Set(1, LedState);
+		vTaskDelay(2*configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
+		Board_LED_Set(1, LedState);
+		vTaskDelay(configTICK_RATE_HZ);
+	}
+}
+//
+///*This is the thread for LED 2*/
+static void LED3_Task(void *pvParameters)
+{
+	bool LedState = false;
+	while(1)
+	{
+		turnOff();
+		vTaskDelay(3*configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
 
-    // Force the counter to be placed into memory
-    volatile static int i = 0 ;
-    // Enter an infinite loop, just incrementing a counter
-    while(1) {
-        i++ ;
-    }
+		Board_LED_Set(3, LedState);
+		vTaskDelay(configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
+
+		Board_LED_Set(3, LedState);
+	}
+
+}
+
+
+int main(void)
+{
+	setHardware();
+	//Create the first version of the code
+	xTaskCreate(LED1_Task, (signed char *) "LED1_Task",
+					configMINIMAL_STACK_SIZE, NULL, (tskIDLE_PRIORITY + 1UL),
+					(xTaskHandle *) NULL);
+
+	xTaskCreate(LED2_Task,(signed char *) "LED2_Task",
+					configMINIMAL_STACK_SIZE,NULL,(tskIDLE_PRIORITY + 2UL),
+					(xTaskHandle *)NULL);
+
+//	xTaskCreate(LED3_Task,(signed char *) "LED3_Task",
+//					configMINIMAL_STACK_SIZE,NULL,(tskIDLE_PRIORITY + 3UL),
+//					(xTaskHandle * )NULL);
+
+    vTaskStartScheduler();
     return 0 ;
 }

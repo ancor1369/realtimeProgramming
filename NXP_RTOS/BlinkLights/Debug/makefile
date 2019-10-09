@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
+-include freertos/src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -29,7 +30,7 @@ all: BlinkLights.axf
 BlinkLights.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"/home/andres/Documents/EMBT/Term3/Ese3025/realtimeProgramming/NXP_RTOS/lpc_board_nxp_lpcxpresso_1769/Debug" -L"/home/andres/Documents/EMBT/Term3/Ese3025/realtimeProgramming/NXP_RTOS/lpc_chip_175x_6x/Debug" -Xlinker -Map="BlinkLights.map" -Xlinker --cref -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "BlinkLights_Debug.ld" -o "BlinkLights.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"/home/andres/Documents/EMBT/Term3/Ese3025/realtimeProgramming/NXP_RTOS/lpc_board_nxp_lpcxpresso_1769/Debug" -L"/home/andres/Documents/EMBT/Term3/Ese3025/realtimeProgramming/NXP_RTOS/lpc_chip_175x_6x/Debug" -Xlinker -Map="BlinkLights.map" -Xlinker --gc-sections -mcpu=cortex-m3 -mthumb -T "BlinkLights_Debug.ld" -o "BlinkLights.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
