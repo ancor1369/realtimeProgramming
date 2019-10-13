@@ -75,7 +75,7 @@ static void Board_LED_Init(void)
 	/* Set the PIO_22 as output */
 	Chip_GPIO_WriteDirBit(LPC_GPIO, LED0_GPIO_PORT_NUM, LED0_GPIO_BIT_NUM, true);
 	Chip_GPIO_WriteDirBit(LPC_GPIO, LED1_GPIO_PORT_NUM, LED1_GPIO_BIT_NUM, true);
-	//Chip_GPIO_WriteDirBit(LPC_GPIO, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, true);
+	Chip_GPIO_WriteDirBit(LPC_GPIO, LED2_GPIO_PORT_NUM, LED2_GPIO_BIT_NUM, true);
 }
 
 /*****************************************************************************
@@ -132,6 +132,7 @@ void Board_UARTPutSTR(char *str)
 	}
 #endif
 }
+//setHardware
 
 /* Sets the state of a board LED to on or off */
 void Board_LED_Set(uint8_t LEDNumber, bool OnorOff)
@@ -194,7 +195,7 @@ void Board_Init(void)
 
 	/* Initializes GPIO */
 	Chip_GPIO_Init(LPC_GPIO);
-	//Chip_GPIO_Init(LPC_GPIO3);
+	Chip_GPIO_Init(LPC_GPIO3);
 	Chip_IOCON_Init(LPC_IOCON);
 
 	/* Initialize LEDs */
