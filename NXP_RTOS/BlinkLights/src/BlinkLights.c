@@ -13,8 +13,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#define timeCnt 3;
-
 static void setHardware(void)
 {
 	SystemCoreClockUpdate();
@@ -24,15 +22,17 @@ static void setHardware(void)
 /*This is the Task for LED 1*/
 static void LED1_Task(void *pvParameters)
 {
-	bool LedState = false;
+	bool LedState = true;
 	while (1)
 	{
-		LedState = false;
+
+		LedState = (bool)!LedState;
 		Board_LED_Set(0, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
-		LedState = true;
+		LedState = (bool)!LedState;
 		Board_LED_Set(0, LedState);
 		vTaskDelay(3*configTICK_RATE_HZ);
+		LedState = true;
 	}
 }
 
@@ -42,15 +42,17 @@ static void LED2_Task(void *pvParameters)
 	bool LedState = false;
 	while(1)
 	{
-		LedState = true;
+		LedState = (bool)!LedState;
+		Board_LED_Set(1, LedState);
+		vTaskDelay(configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
+		Board_LED_Set(1, LedState);
+		vTaskDelay(2*configTICK_RATE_HZ);
+		LedState = (bool)!LedState;
 		Board_LED_Set(1, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
 		LedState = false;
-		Board_LED_Set(1, LedState);
-		vTaskDelay(2*configTICK_RATE_HZ);
-		LedState = true;
-		Board_LED_Set(1, LedState);
-		vTaskDelay(configTICK_RATE_HZ);
+
 	}
 }
 //
@@ -60,12 +62,14 @@ static void LED3_Task(void *pvParameters)
 	bool LedState = false;
 	while(1)
 	{
-		LedState = true;
+		LedState = (bool)!LedState;
 		Board_LED_Set(2, LedState);
 		vTaskDelay(3*configTICK_RATE_HZ);
-		LedState = false;
+		LedState = (bool)!LedState;
 		Board_LED_Set(2, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
+		LedState = false;
+;
 	}
 
 }
