@@ -1,6 +1,5 @@
 BlinkLights.c:18:13:setHardware	8	static
-BlinkLights.c:27:13:turnOff	8	static
-BlinkLights.c:35:13:LED1_Task	24	static
-BlinkLights.c:52:13:LED2_Task	24	static
-BlinkLights.c:69:13:LED3_Task	24	static
-BlinkLights.c:88:5:main	24	static
+BlinkLights.c:25:13:LED1_Task	24	static
+BlinkLights.c:40:13:LED2_Task	24	static
+BlinkLights.c:58:13:LED3_Task	24	static
+BlinkLights.c:74:5:main	24	static

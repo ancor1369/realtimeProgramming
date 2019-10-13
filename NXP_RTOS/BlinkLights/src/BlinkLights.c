@@ -19,32 +19,20 @@ static void setHardware(void)
 {
 	SystemCoreClockUpdate();
 	Board_Init();
-	Board_LED_Set(0, false);
-	Board_LED_Set(1, false);
-	//Board_LED_Set(3, false);
-}
-
-static void turnOff(void)
-{
-	Board_LED_Set(0, false);
-	Board_LED_Set(1, false);
-	Board_LED_Set(2, false);
 }
 
 /*This is the Task for LED 1*/
 static void LED1_Task(void *pvParameters)
 {
-	bool LedState = true;
-
+	bool LedState = false;
 	while (1)
 	{
-		turnOff();
+		LedState = false;
 		Board_LED_Set(0, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
-		LedState = (bool) !LedState;
+		LedState = true;
 		Board_LED_Set(0, LedState);
 		vTaskDelay(3*configTICK_RATE_HZ);
-		LedState = (bool) !LedState;
 	}
 }
 
@@ -54,12 +42,13 @@ static void LED2_Task(void *pvParameters)
 	bool LedState = false;
 	while(1)
 	{
-		turnOff();
+		LedState = true;
+		Board_LED_Set(1, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
-		LedState = (bool)!LedState;
+		LedState = false;
 		Board_LED_Set(1, LedState);
 		vTaskDelay(2*configTICK_RATE_HZ);
-		LedState = (bool)!LedState;
+		LedState = true;
 		Board_LED_Set(1, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
 	}
@@ -71,15 +60,12 @@ static void LED3_Task(void *pvParameters)
 	bool LedState = false;
 	while(1)
 	{
-		turnOff();
+		LedState = true;
+		Board_LED_Set(2, LedState);
 		vTaskDelay(3*configTICK_RATE_HZ);
-		LedState = (bool)!LedState;
-
-		Board_LED_Set(3, LedState);
+		LedState = false;
+		Board_LED_Set(2, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
-		LedState = (bool)!LedState;
-
-		Board_LED_Set(3, LedState);
 	}
 
 }
@@ -97,9 +83,9 @@ int main(void)
 					configMINIMAL_STACK_SIZE,NULL,(tskIDLE_PRIORITY + 2UL),
 					(xTaskHandle *)NULL);
 
-//	xTaskCreate(LED3_Task,(signed char *) "LED3_Task",
-//					configMINIMAL_STACK_SIZE,NULL,(tskIDLE_PRIORITY + 3UL),
-//					(xTaskHandle * )NULL);
+	xTaskCreate(LED3_Task,(signed char *) "LED3_Task",
+					configMINIMAL_STACK_SIZE,NULL,(tskIDLE_PRIORITY + 3UL),
+					(xTaskHandle * )NULL);
 
     vTaskStartScheduler();
     return 0 ;
