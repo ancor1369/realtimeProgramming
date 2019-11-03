@@ -2,7 +2,7 @@
 
 To show up the basics of how the an RTOS works, we are using the platform LPCExpresso 1796 that features an ARM cortex M3 LPC1769FBD100 processor and some IO to use it as the core of any applicaiton where it might be useful.
 
-In this laboratory, the idea is to test the implementation of a very simple application to feature the FreeRTOS.
+The idea is to test the implementation of a very simple application to feature the FreeRTOS.
 
 The application is implemented on the code exposed on the file src/BlinkLights.c.
 
@@ -44,7 +44,7 @@ xTaskCreate(LED1_Task, (signed char *) "LED1_Task",
 }
 ```
 
-The objective f the implementation is to make the LEDs on the board to blik in sequence as it is stated on the following task operation graph.
+The objective of the implementation is to make the LEDs on the board to blik in sequence as it is stated on the following task operation graph.
 
 
 ![image](https://user-images.githubusercontent.com/25968721/66720815-92e4eb80-edcf-11e9-94c4-8baa7a54e124.png)
