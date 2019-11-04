@@ -1,0 +1,23 @@
+"FreeRTOS Task Aware Debugger for GDB" version 11.0.1 (201907311258)
+(c) 2016-2018 NXP Semiconductors, Inc.
+==================================
+18:23:33.954 INFO: [TadModel] DSF session ID 0 has started.
+18:23:40.251 INFO: [TadState] TAD state changed:  DEBUG_STARTED -> DEBUG_INIT_0 (RESUMED, USER_REQUEST)
+18:23:40.323 INFO: [TadState] TAD state changed:  DEBUG_INIT_0 -> DEBUG_INIT_1 (SUSPENDED, SIGNAL)
+18:23:41.725 INFO: [TadState] TAD state changed:  DEBUG_INIT_1 -> DEBUG_SUSPENDED (RESUMED, USER_REQUEST)
+18:23:41.801 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_SUSPENDED (SUSPENDED, BREAKPOINT)
+18:23:52.19 INFO: [TadState] TAD state changed:  DEBUG_SUSPENDED -> DEBUG_RESUMED (RESUMED, USER_REQUEST)
+18:24:10.896 INFO: [TadState] TAD state changed:  DEBUG_RESUMED -> READY (SUSPENDED, SIGNAL)
+18:24:10.912 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" has started.
+18:24:10.937 ERROR: [VariableReader] Could not read variable expression: "&(FreeRTOSDebugConfig)".
+18:24:10.940 ERROR: [VariableReader] Could not read variable expression: "sizeof(struct TaskControlBlock_t)".
+18:24:10.948 INFO: [TadModel] FreeRTOS version has been identified from available FreeRTOS symbols as 10.0.
+18:24:10.948 INFO: [Benchmark] Loading data for "Determine FreeRTOS version" took 37 ms.
+18:24:10.948 INFO: [Benchmark] Loading data for "Heap Usage" has started.
+18:24:10.963 ERROR: [VariableReader] Could not read variable expression: "ulTotalRunTime".
+18:24:10.963 ERROR: [TaskFactory] ulTotalRunTime not available
+18:24:11.17 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x1000090c)->pxEndOfStack)".
+18:24:11.17 INFO: [FreeRTOS] FreeRTOS macro "configRECORD_STACK_HIGH_ADDRESS" is disabled.
+18:24:11.71 ERROR: [VariableReader] Could not read variable expression: "(((struct tskTaskControlBlock *) 0x1000090c)->ulRunTimeCounter)".
+18:24:11.71 INFO: [FreeRTOS] FreeRTOS macro "configGENERATE_RUN_TIME_STATS" is disabled.
+18:24:12.914 INFO: [TadModel] DSF session ID 0 has ended.
