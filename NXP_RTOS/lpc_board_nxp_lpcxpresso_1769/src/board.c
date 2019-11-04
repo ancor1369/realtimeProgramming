@@ -201,6 +201,7 @@ void Board_Init(void)
 	/* Initialize LEDs */
 	Board_LED_Init();
 	Board_Debug_Init();
+
 }
 
 /* Returns the MAC address assigned to this board */
