@@ -31,7 +31,7 @@ static void LED1_Task(void *pvParameters)
 		vTaskDelay(configTICK_RATE_HZ);
 		LedState = (bool)!LedState;
 		Board_LED_Set(0, LedState);
-		vTaskDelay(3*configTICK_RATE_HZ);
+		vTaskDelay(2*configTICK_RATE_HZ);
 		LedState = true;
 	}
 }
@@ -47,7 +47,7 @@ static void LED2_Task(void *pvParameters)
 		vTaskDelay(configTICK_RATE_HZ);
 		LedState = (bool)!LedState;
 		Board_LED_Set(1, LedState);
-		vTaskDelay(2*configTICK_RATE_HZ);
+		vTaskDelay(configTICK_RATE_HZ);
 		LedState = (bool)!LedState;
 		Board_LED_Set(1, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
@@ -64,7 +64,7 @@ static void LED3_Task(void *pvParameters)
 	{
 		LedState = (bool)!LedState;
 		Board_LED_Set(2, LedState);
-		vTaskDelay(3*configTICK_RATE_HZ);
+		vTaskDelay(2*configTICK_RATE_HZ);
 		LedState = (bool)!LedState;
 		Board_LED_Set(2, LedState);
 		vTaskDelay(configTICK_RATE_HZ);
