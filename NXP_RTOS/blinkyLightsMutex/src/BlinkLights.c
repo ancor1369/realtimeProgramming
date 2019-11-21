@@ -35,7 +35,7 @@ static void toggleLED(int * ledNum,bool * state)
 }
 
 static void GeneralLed_Task(void  *taskConfig1)
-{
+{toggleLED
 	LedConfig *taskConfig = (LedConfig*)taskConfig1;
 
 		bool LedState = false;

@@ -4,3 +4,5 @@ NXP_RTOS/lpc_board_nxp_lpcxpresso_1769/Debug
 NXP_RTOS/lpc_chip_175x_6x/Debug/
 QTUI/qtLaboratory/build-qt-tutorial-Variscite-Release/
 QTUI/qtLaboratory/build-qt-tutorial-Variscite-Debug/
+/DataStructures/LinkedList/dist/
+/DataStructures/LinkedList/build/
