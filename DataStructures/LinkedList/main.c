@@ -21,30 +21,40 @@
  */
 int main(int argc, char** argv) 
 {    
-    node_t *Head = NULL;
-    node_t *Second = NULL;
-    node_t *Third = NULL;    
+    data_struct newData;
+    newData.id = 0;
+    strcpy(newData.message,"Second");
     
-    data_struct one;
-    one.id = 0;
-    strcpy(one.message,"Zero");
+    node_t *pHead = createHead(newData);
+
+    data_struct moreData;
+    moreData.id = 1;
+    strcpy(moreData.message,"Message");
+ 
+    data_struct secodDat;
+    secodDat.id = 2;
+    strcpy(secodDat.message,"Yeah");
     
-    data_struct two;
-    two.id = 1;
-    strcpy(two.message,"One");
+    data_struct th;
+    th.id = 3;
+    strcpy(th.message,"The th");
     
-    data_struct three;
-    three.id = 2;
-    strcpy(three.message,"Two");
+    addNode(pHead,moreData);
+    addNode(pHead,secodDat);
+    addNode(pHead,th);
     
-    Head = addNode(one);
-    Second = addNode(two);
-    Third = addNode(three);
-    linkLists(Head, Second);
-    linkLists(Second,Third);
+    printNodes(pHead);
     
+    deleteNode(pHead,secodDat);
     
-    printNodes(Head);
+    printNodes(pHead);
+    
+    //I want to retrieve one of the pointers to 
+    //get the information out of it.
+    node_t *aPointer = getNode(pHead,moreData);
+    strcpy(aPointer->data.message,"Change");
+    
+    printNodes(pHead);
  
     return (EXIT_SUCCESS);
 }
