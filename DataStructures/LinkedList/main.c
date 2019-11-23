@@ -21,49 +21,41 @@
  */
 int main(int argc, char** argv) 
 {    
-    node_t *Head = createNode();
-    node_t *Second = createNode();
-    node_t *Third = createNode();
+    data_struct newData;
+    newData.id = 0;
+    strcpy(newData.message,"Second");
     
-    
-    data_struct one;
-    one.id = 0;
-    strcpy(one.message,"Zero");
-    
-    data_struct two;
-    two.id = 1;
-    strcpy(two.message,"One");
-    
-    data_struct three;
-    three.id = 2;
-    strcpy(three.message,"Two");
+    node_t *pHead = createHead(newData);
 
-    Head->data = one;
-    Head->pNext = Second;
-    Second->data = two;
-    Second->pNext = Third;
-    Third->data = three;   
+    data_struct moreData;
+    moreData.id = 1;
+    strcpy(moreData.message,"Message");
+ 
+    data_struct secodDat;
+    secodDat.id = 2;
+    strcpy(secodDat.message,"Yeah");
     
+    data_struct th;
+    th.id = 3;
+    strcpy(th.message,"The th");
     
+    addNode(pHead,moreData);
+    addNode(pHead,secodDat);
+    addNode(pHead,th);
     
+    printNodes(pHead);
     
-    //printNodes(Head);
-    int i = 0;
+    deleteNode(pHead,secodDat);
     
-    node_t *pw = Head;
+    printNodes(pHead);
     
-    while(i<3)
-    {
-        i++;
-        printf("%d\n",pw->data.id);
-        printf("%s\n",pw->data.message);   
-        
-        pw = pw->pNext;
-        if(pw->pNext == NULL)
-        {
-            i=2;
-        }
-    }    
+    //I want to retrieve one of the pointers to 
+    //get the information out of it.
+    node_t *aPointer = getNode(pHead,moreData);
+    strcpy(aPointer->data.message,"Change");
+    
+    printNodes(pHead);
+ 
     return (EXIT_SUCCESS);
 }
 
