@@ -5,24 +5,23 @@
  */
 
 #include <stdlib.h>
-
 #include "node.h"
 
-
-void addNode(node_t *pHead, node_t data)
+void addNode(node_t *pHead, data_struct data)
 {
     //create a new node
-    node_t *pNode = createNode();
-    pNode->id = data.id;
-    pNode->name = data.name;
-    
-    node_t *pw; //Working pointer
-    pw = pHead; //Assume we have at least one node
-    while(pw->pNext != NULL)
-    {
-        pw=pw->pNext;
-    }
-    pw->pNext = pNode;
+    //pHead = createNode();
+    pHead->data=data;        
+//    node_t *pw; //Working pointer
+//    pw = pHead; //Assume we have at least one node   
+//   
+//    
+//    while(pw->pNext != NULL)
+//    {
+//        pw=pw->pNext;
+//    }
+//   
+//    pw->pNext = pNode;
     return;
 }
 
@@ -35,5 +34,21 @@ node_t* createNode(void)
     return pNew;
 }
 
+void linkLists(node_t *pCurrent, node_t *pNext)
+{
+    pCurrent->pNext = pNext;
+    return;
+}
+
+void printNodes(node_t *pHead)
+{
+    while( pHead->pNext != NULL)
+    {
+        printf(pHead->data.id);
+        printf(pHead->data.message);
+        printf("/n");
+        pHead = pHead->pNext;               
+    }
+}
 
 
