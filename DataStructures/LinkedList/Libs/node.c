@@ -7,22 +7,11 @@
 #include <stdlib.h>
 #include "node.h"
 
-void addNode(node_t *pHead, data_struct data)
+node_t * addNode(data_struct data)
 {
     //create a new node
-    //pHead = createNode();
-    pHead->data=data;        
-//    node_t *pw; //Working pointer
-//    pw = pHead; //Assume we have at least one node   
-//   
-//    
-//    while(pw->pNext != NULL)
-//    {
-//        pw=pw->pNext;
-//    }
-//   
-//    pw->pNext = pNode;
-    return;
+    node_t *pHead = createNode();
+    pHead->data=data;
 }
 
 /*It is in charge to create the memory spaces needed to hold a new node*/
@@ -44,11 +33,16 @@ void printNodes(node_t *pHead)
 {
     while( pHead->pNext != NULL)
     {
-        printf(pHead->data.id);
-        printf(pHead->data.message);
-        printf("/n");
+        printf("%d\n",pHead->data.id);
+        printf("%s\n",pHead->data.message);          
         pHead = pHead->pNext;               
     }
+    if(pHead->pNext == NULL)
+    {
+        printf("%d\n",pHead->data.id);
+        printf("%s\n",pHead->data.message); 
+    }
+    return;
 }
 
 

@@ -21,10 +21,9 @@
  */
 int main(int argc, char** argv) 
 {    
-    node_t *Head = createNode();
-    node_t *Second = createNode();
-    node_t *Third = createNode();
-    
+    node_t *Head = NULL;
+    node_t *Second = NULL;
+    node_t *Third = NULL;    
     
     data_struct one;
     one.id = 0;
@@ -37,33 +36,16 @@ int main(int argc, char** argv)
     data_struct three;
     three.id = 2;
     strcpy(three.message,"Two");
-
-    Head->data = one;
-    Head->pNext = Second;
-    Second->data = two;
-    Second->pNext = Third;
-    Third->data = three;   
+    
+    Head = addNode(one);
+    Second = addNode(two);
+    Third = addNode(three);
+    linkLists(Head, Second);
+    linkLists(Second,Third);
     
     
-    
-    
-    //printNodes(Head);
-    int i = 0;
-    
-    node_t *pw = Head;
-    
-    while(i<3)
-    {
-        i++;
-        printf("%d\n",pw->data.id);
-        printf("%s\n",pw->data.message);   
-        
-        pw = pw->pNext;
-        if(pw->pNext == NULL)
-        {
-            i=2;
-        }
-    }    
+    printNodes(Head);
+ 
     return (EXIT_SUCCESS);
 }
 

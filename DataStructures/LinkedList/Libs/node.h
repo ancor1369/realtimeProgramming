@@ -34,7 +34,7 @@ typedef struct node_struct node_t;
 
 
 
-void addNode(node_t *pHead, data_struct data);
+node_t* addNode(data_struct data);
 void linkLists(node_t *pCurrent, node_t *pNext);
 node_t* createNode(void);
 void printNodes(node_t *pHead);
