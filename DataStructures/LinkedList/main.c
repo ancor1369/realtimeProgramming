@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "Libs/node.h"
 
 /*
@@ -28,15 +28,15 @@ int main(int argc, char** argv)
     
     data_struct one;
     one.id = 0;
-    one.message[10] = (char)"Hello";
+    strcpy(one.message,"Zero");
     
     data_struct two;
     two.id = 1;
-    two.message[10] = (char)"There";
+    strcpy(two.message,"One");
     
     data_struct three;
     three.id = 2;
-    three.message[10] = (char)"This is";    
+    strcpy(three.message,"Two");
 
     Head->data = one;
     Head->pNext = Second;
@@ -45,16 +45,25 @@ int main(int argc, char** argv)
     Third->data = three;   
     
     
-    printf("Hello world");
+    
     
     //printNodes(Head);
+    int i = 0;
     
+    node_t *pw = Head;
     
-    printf(Head->data.id);
-    printf(Head->data.message);
-    printf("\n");
-
-    
+    while(i<3)
+    {
+        i++;
+        printf("%d\n",pw->data.id);
+        printf("%s\n",pw->data.message);   
+        
+        pw = pw->pNext;
+        if(pw->pNext == NULL)
+        {
+            i=2;
+        }
+    }    
     return (EXIT_SUCCESS);
 }
 

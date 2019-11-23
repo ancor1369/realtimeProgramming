@@ -14,17 +14,19 @@
 
 /*Definition of the functions to be used in the code*/
 
+#include <string.h>
+
 struct data_structure
 {
     int id;
-    char message[10];
+    char message[6];
 };
 typedef struct data_structure data_struct;
 
 struct node_struct
 {
     data_struct data;
-    struct node_struct *pNext;
+    struct node_t *pNext;
 };    
 typedef struct node_struct node_t;
 
