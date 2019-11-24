@@ -52,7 +52,7 @@ int main(int argc, char** argv)
     //I want to retrieve one of the pointers to 
     //get the information out of it.
     node_t *aPointer = getNode(pHead,moreData);
-    strcpy(aPointer->data.message,"Change");
+    strcpy(aPointer->data.message,"Change");   
     
     printNodes(pHead);
  
